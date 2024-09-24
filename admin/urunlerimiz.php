@@ -1,0 +1,72 @@
+<a href="urun-ekle" class="btn btn-primary">Ürün Ekle</a>
+<table id="example" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>Kategori</th>
+            <th>Durum (Aktif)</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <?php
+        $anaUrunler = $conn->prepare("SELECT *
+        FROM urunler
+        INNER JOIN anaUrunler ON urunler.anaUrunId = anaUrunler.anaUrunId
+        ORDER BY urunBaslik ASC
+        ");
+        $anaUrunler->execute();
+        $anaUrunler = $anaUrunler->fetchAll();
+        foreach ($anaUrunler as $key => $value) { ?>
+            <tr>
+                <td><?= $value["urunBaslik"]; ?></td>
+                <td><?= $value["anaUrunIsim"]; ?></td>
+                <td>
+                    <div class="form-check form-switch">
+                        <input onclick="urunDurumGuncelle(<?= $value['urunId']; ?>)"
+                            style="width: 20px; height: 20px;vertical-align: middle;" class="form-check-input"
+                            type="checkbox" role="switch" id="durumUrun_<?= $value["urunId"]; ?>"
+                            <?php
+                            if ($value["urunState"] == true) {
+                                echo "checked";
+                            }
+                            ?>>
+                        <label for="durumUrun_<?= $value["urunId"]; ?>">
+                            (<span id="urunDurumText_<?= $value["urunId"]; ?>">
+                                <?php
+                                if ($value["urunState"] == true) {
+                                    echo "Aktif";
+                                } else {
+                                    echo "Pasif";
+                                }
+                                ?>
+                            </span>)
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <button class="border border-5 border-success rounded-pill p-1 text-success">
+                        <i class="align-middle fi fi-rr-social-network h5"></i>
+                        <span><?= $value["urunLike"]; ?></span>
+                    </button>
+                    <button class="border border-5 border-danger rounded-pill p-1 text-danger mx-1">
+                        <i class="align-middle fi fi-rr-hand h5"></i>
+                        <span><?= $value["urunDislike"]; ?></span>
+                    </button>
+                    <a href="urun-duzenle?uid=<?= $value["urunId"]; ?>" class="border border-5 border-secondary rounded-pill p-2 text-secondary">
+                        <i class="align-middle fi fi-rr-edit h5"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php } ?>
+    </tbody>
+</table>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+
+<script>
+    new DataTable('#example');
+</script>

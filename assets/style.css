@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+
+* {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+
+input,
+textarea,
+select,
+button {
+    box-shadow: none !important;
+}
+
+.fi {
+    font-size: 17px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+a {
+    text-decoration: none !important;
+    color: #000 !important;
+}
+
+a.btn {
+    text-decoration: initial !important;
+    color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+}
+
+
+.card-img-urun {
+    background-size: cover;
+    height: 130px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.haber-carousel-img {
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.login-card {
+    position: absolute !important;
+    inset: 0;
+    height: max-content !important;
+}
+
+/* MOBİL */
+@media only screen and (max-width: 1200px) {
+    .kampanya-img {
+        width: 90%;
+    }
+
+    #cafe-logo {
+        display: none;
+    }
+
+    .haber-carousel-img {
+        height: 300px;
+    }
+
+    .carousel-caption {
+        display: block !important;
+    }
+}
+
+/* PC */
+@media only screen and (min-width: 1200px) {
+    .kampanya-img {
+        width: 50%;
+    }
+
+    #cafe-logo {
+        width: 100px;
+    }
+}
